@@ -4,7 +4,7 @@ class Proprietaire extends User{
 
     public function afficherDetails()
     {
-        echo "Nom du propitaire: {$this->name}, Adresse du proprietaire: {$this->adress}, phoneNumber du proprietaire: {$this->phoneNumber}\n";
+        return "Nom du propriétaire: {$this->name}, Adresse du propriétaire: {$this->adress}, Téléphone du propriétaire: {$this->phoneNumber}";
     }
 
 }
