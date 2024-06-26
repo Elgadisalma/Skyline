@@ -12,6 +12,36 @@ abstract class User implements Details{
         $this->phoneNumber = $phoneNumber;
     }
 
+
+
+    // Getters
+    public function getName() {
+        return $this->name;
+    }
+
+    public function getAdress() {
+        return $this->adress;
+    }
+
+    public function getPhoneNumber() {
+        return $this->phoneNumber;
+    }
+
+    // Setters
+    public function setName($name) {
+        $this->name = $name;
+    }
+
+    public function setAdress($adress) {
+        $this->adress = $adress;
+    }
+
+    public function setPhoneNumber($phoneNumber) {
+        $this->phoneNumber = $phoneNumber;
+    }
+
+
+
     abstract function afficherDetails();
 
 }
