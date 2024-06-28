@@ -1,23 +1,20 @@
 <?php
 
-class Trajet implements Details{
+class Trajet implements Details {
 
-    private $vehicule;
+    protected $vehicule;
     private $pointEntre;
     private $pointSortie;
     private $dateEntre;
-    // private $event;
+    private $events = [];
 
     public function __construct($vehicule, $pointEntre, $pointSortie, $dateEntre) {
         $this->vehicule = $vehicule;
         $this->pointEntre = $pointEntre;
         $this->pointSortie = $pointSortie;
         $this->dateEntre = $dateEntre;
-        // $this->event = $event;
     }
 
-
-    
     // Getters
     public function getVehicule() {
         return $this->vehicule;
@@ -35,8 +32,10 @@ class Trajet implements Details{
         return $this->dateEntre;
     }
 
+    public function getEvents() {
+        return $this->events;
+    }
 
-    
     // Setters
     public function setVehicule($vehicule) {
         $this->vehicule = $vehicule;
@@ -54,12 +53,15 @@ class Trajet implements Details{
         $this->dateEntre = $dateEntre;
     }
 
+    public function setEvents($events) {
+        $this->events = $events;
+    }
 
-
-   public function afficherDetails() {
-        echo "trajet: entre: {$this->pointEntre}, sortie: {$this->pointSortie}, dateEntre: {$this->dateEntre}\n";
-        // foreach ($this->events as $event) {
-        //     $event->displayDetails();
-        // }
+    public function afficherDetails() {
+        $details = "Trajet: Véhicule: {$this->vehicule->getMatricule()}, Entre: {$this->pointEntre}, Sortie: {$this->pointSortie}, Date d'entrée: {$this->dateEntre}\n";
+        foreach ($this->events as $event) {
+            $details .= $event->afficherDetails() . "\n";
+        }
+        return $details;
     }
 }

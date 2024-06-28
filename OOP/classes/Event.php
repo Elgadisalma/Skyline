@@ -1,6 +1,6 @@
 <?php
 
-class Event implements Details{
+class Event implements Details {
 
     protected $type;
     private $description;
@@ -12,47 +12,35 @@ class Event implements Details{
         $this->description = $description;
     }
 
-
     // Getters
-
-    public function getType($type)
-    {
-        return $type;
+    public function getType() {
+        return $this->type;
     }
 
-    public function getDescription($description)
-    {
-        return $description;
+    public function getDescription() {
+        return $this->description;
     }
 
-    public function getTime($event_time)
-    {
-        return $event_time;
+    public function getTime() {
+        return $this->event_time;
     }
-
-
 
     // Setters
-
-    public function setType($type)
-    {
+    public function setType($type) {
         $this->type = $type;
     }
 
-    public function setDescription($description)
-    {
+    public function setDescription($description) {
         $this->description = $description;
     }
 
-    public function setTime($event_time)
-    {
+    public function setTime($event_time) {
         $this->event_time = $event_time;
     }
 
-
-    public function afficherDetails()
-    {
-        echo "Event: type: {$this->type}, event_time: {$this->event_time}, description: {$this->description}\n";
+    public function afficherDetails() {
+        return "Event: Type: {$this->type}, Heure de l'événement: {$this->event_time}, Description: {$this->description}";
     }
-
 }
+
+
