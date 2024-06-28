@@ -1,10 +1,11 @@
+<!-- 1. Créer la base de données : -->
+
 CREATE TABLE proprietaires (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     full_name VARCHAR(255) NOT NULL,
     adress VARCHAR(255) NOT NULL,
     phone VARCHAR(255) NOT NULL,
-    cin VARCHAR(255) NOT NULL,
-    created_at TIMESTAMP NULL DEFAULT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NULL DEFAULT NULL
 );
 
@@ -15,8 +16,7 @@ CREATE TABLE vehicules (
     matricule VARCHAR(255) NOT NULL,
     type ENUM('voiture', 'moto', 'camion') NOT NULL,
     proprietaire_id BIGINT NULL,
-    created_at TIMESTAMP NULL DEFAULT NULL,
-    updated_at TIMESTAMP NULL DEFAULT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (proprietaire_id) REFERENCES proprietaires(id)
 );
 
@@ -29,8 +29,7 @@ CREATE TABLE trajets (
     sortie VARCHAR(255) NOT NULL,
     date_sortie VARCHAR(255) NOT NULL,
     vehicule_id BIGINT NOT NULL,
-    created_at TIMESTAMP NULL DEFAULT NULL,
-    updated_at TIMESTAMP NULL DEFAULT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (vehicule_id) REFERENCES vehicules(id)
 );
 
@@ -41,8 +40,7 @@ CREATE TABLE peages (
     price VARCHAR(255) NOT NULL,
     emplacement VARCHAR(255) NOT NULL,
     trajet_id BIGINT NOT NULL,
-    created_at TIMESTAMP NULL DEFAULT NULL,
-    updated_at TIMESTAMP NULL DEFAULT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (trajet_id) REFERENCES trajets(id)
 );
 
@@ -55,8 +53,7 @@ CREATE TABLE events (
     event_time VARCHAR(255) NOT NULL,
     vehicule_id BIGINT NOT NULL,
     trajet_id BIGINT NOT NULL,
-    created_at TIMESTAMP NULL DEFAULT NULL,
-    updated_at TIMESTAMP NULL DEFAULT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (vehicule_id) REFERENCES vehicules(id),
     FOREIGN KEY (trajet_id) REFERENCES trajets(id)
 );
@@ -67,18 +64,17 @@ CREATE TABLE events (
 
 
 
+<!-- 2. Insertion de données : -->
 
 
-insertion des valeurs :
------------------------
 
 -- proprietaire table --
 
-INSERT INTO proprietaires (full_name, adress, phone, cin) 
+INSERT INTO proprietaires (full_name, adress, phone) 
 VALUES 
-('salma', 'marrakech', '12345678', '1234'), 
-('amina', 'casablanca', '87654321', '5678'), 
-('youssef', 'rabat', '12349876', '9101');
+('salma', 'marrakech', '12345678'), 
+('amina', 'casablanca', '87654321'), 
+('youssef', 'rabat', '12349876');
 
 
 
@@ -120,3 +116,69 @@ INSERT INTO events (type, description, event_time, vehicule_id, trajet_id)
 VALUES
 ('arrêts', 'testtesttesttesttesttesttest', '2024-06-25 10:00:00', 1, 1),
 ('accidents', 'testtesttesttesttesttesttesttest', '2024-06-27 15:30:00', 2, 2);
+
+
+
+
+
+
+
+<!-- 3. Requêtes SQL : -->
+
+---------- 1 ------------
+
+SELECT * FROM vehicules join proprietaires on proprietaire_id = proprietaires.id;
+
+
+
+---------- 2 ------------
+
+SELECT * FROM trajets where vehicule_id = '1';
+
+
+
+---------- 3 ------------
+
+SELECT * FROM peages WHERE DATE(created_at) = CURDATE() ;
+
+
+
+---------- 4 ------------
+
+SELECT
+    v.matricule AS vehicule_matricule,
+    DATE(t.date_entre) AS date_trajet,
+    COUNT(*) AS nombre_trajets
+FROM
+    trajets t
+JOIN
+    vehicules v ON t.vehicule_id = v.id
+GROUP BY
+    v.matricule, DATE(t.date_entre);
+    
+
+
+
+---------- 5 ------------
+
+SELECT COUNT(*) AS total FROM trajets;
+
+
+
+
+---------- 6 ------------
+
+SELECT
+v.matricule AS matricule,
+MONTH(CURDATE()) AS mois,
+COUNT(*) AS nombreTrajet
+FROM trajets t 
+JOIN vehicules v 
+ON v.id = t.vehicule_id
+WHERE MONTH(t.date_entre) = MONTH(CURDATE()) 
+GROUP BY
+v.matricule
+ORDER BY
+nombreTrajet DESC;
+
+
