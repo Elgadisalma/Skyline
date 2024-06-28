@@ -20,3 +20,70 @@ body {
     padding: 100px 20px;
     color: white;
 }
+
+.stats-cont {
+    display: flex;
+    justify-content: center;
+}
+
+.about-us {
+    width: 100%;
+    background-color: white;
+    text-align: center;
+    padding: 4rem;
+}
+
+.qualite {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 4rem 0rem;
+    gap: 10px;
+}
+
+.q-card {
+    padding: 0rem 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+}
+
+.solutions-container {
+    height: fit-content;
+    background-color: white;
+    width: 100%;
+    padding: 4rem;
+}
+
+.solutions-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 3rem 0rem;
+    gap: 10px;
+}
+
+.solution-card {
+    padding: 0rem 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2px;
+}
+
+.sponsor {
+    height: fit-content;
+    background-color: rgb(224, 220, 220);
+    width: 100%;
+    padding: 3rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4rem;
+}
+
+.footer {
+    color: white;
+    background-color: rgb(37, 37, 36);
+}
